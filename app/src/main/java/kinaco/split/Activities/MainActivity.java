@@ -2,6 +2,7 @@ package kinaco.split.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -16,6 +17,11 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 import kinaco.split.Fragments.AccountFragment;
@@ -54,6 +60,11 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("user", ParseUser.getCurrentUser());
+        installation.saveInBackground();
+        installation.saveInBackground();
 
     }
 
@@ -158,6 +169,16 @@ public class MainActivity extends ActionBarActivity
                 setTitle(R.string.title_section3);
                 break;
         }
+    }
+
+    public void changeFragment(Fragment fragment, ArrayList<String> arrayList, double amount) {
+        Bundle args = new Bundle();
+        args.putStringArrayList("names", arrayList);
+        args.putDouble("amount", amount);
+        fragment.setArguments(args);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.container, fragment)
+                .commit();
     }
 
     public void onSectionAttached(int number) {

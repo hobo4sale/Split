@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/text"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:textSize="12sp" />
+
     <CheckBox
+        android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:background="@android:drawable/checkbox_on_background"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/checkbox" />
 
-</LinearLayout>
+</RelativeLayout>
